@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEMY CLOSET | Tienda de Moda</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           VARIABLES & RESET
+        ========================================== */
+        :root {
+            --primary: #ff6b8b;
+            --primary-hover: #ff4770;
+            --primary-light: #fff0f3;
+            --accent: #ff85a2;
+            --dark: #2b2d42;
+            --gray: #6c757d;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(255, 107, 139, 0.15);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fffafb;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ==========================================
+           HEADER & NAV
+        ========================================== */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(255, 107, 139, 0.1);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            font-size: 1.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon-btn {
+            position: relative;
+            background: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-icon-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .cart-count {
+            background: var(--primary-hover);
+            color: var(--white);
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================
+           HERO SECTION
+        ========================================== */
+        .hero {
+            margin-top: 70px;
+            height: 75vh;
+            background: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-text {
+            max-width: 550px;
+            z-index: 2;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.9rem 2.2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 107, 139, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn-main:hover {
+            background: var(--primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 139, 0.6);
+        }
+
+        .hero-img-container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-img-container img {
+            width: 380px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* ==========================================
+           FILTER & PRODUCTS (HTML PURO)
+        ========================================== */
+        .catalog {
+            padding: 5rem 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--white);
+            border: 2px solid var(--primary-light);
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card.hide {
+            display: none;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-info {
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .add-to-cart-btn {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.02);
+        }
+
+        /* ==========================================
+           SIDEBAR CARRITO
+        ========================================== */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            max-width: 100%;
+            height: 100%;
+            background: var(--white);
+            z-index: 1002;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 1.5rem;
+            background: var(--primary-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            color: var(--primary);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .cart-item img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cart-item-details h4 {
+            font-size: 1rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .cart-item-remove {
+            margin-left: auto;
+            color: #ef233c;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .cart-footer {
+            padding: 1.5rem;
+            background: var(--light-gray);
+            border-top: 1px solid #e9ecef;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .btn-checkout {
+            width: 100%;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-checkout:hover {
+            background: var(--primary-hover);
+        }
+
+        /* ==========================================
+           NOTIFICACIÓN TOAST
+        ========================================== */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--dark);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: var(--transition);
+            z-index: 2000;
+            opacity: 0;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ==========================================
+           FOOTER & ANIMATIONS
+        ========================================== */
+        footer {
+            background: #ffe6eb;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: var(--gray);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                height: auto;
+                padding: 4rem 5%;
+                text-align: center;
+            }
+
+            .hero-img-container img {
+                width: 100%;
+                max-width: 300px;
+                margin-top: 2rem;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fa-solid fa-gem"></i> STEMY CLOSET
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+            </ul>
+        </nav>
+        <button class="cart-icon-btn" id="open-cart">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </button>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="inicio">
+        <div class="hero-text">
+            <h1>Viste con estilo y elegancia unica</h1>
+            <p>Descubre la colección exclusiva de camisas y pantalones diseñados para resaltar tu personalidad. Calidad y moda al mejor precio.</p>
+            <a href="#catalogo" class="btn-main">Ver Colección</a>
+        </div>
+        <div class="hero-img-container">
+            <img src="WhatsApp Image 2026-10-24 at 7.12.43 PM.jpeg" alt="Moda Stemy Closet">
+        </div>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUCTOS - SOLO CAMISAS Y PANTALONES EN HTML PURO -->
+    <section class="catalog" id="catalogo">
+        <div class="section-title">
+            <h2>Nuestra Colección</h2>
+            <p>Selecciona tus prendas favoritas</p>
+        </div>
+
+        <!-- BOTONES DE FILTRO (Solo Todos, Camisas y Pantalones) -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="camisa">Camisas</button>
+            <button class="filter-btn" data-filter="pantalon">Pantalones</button>
+        </div>
+
+        <!-- PRODUCTOS EN HTML PURO -->
+        <div class="products-grid" id="products-grid">
+            
+            <!-- CAMISAS -->
+            <div class="product-card" data-category="camisa" data-id="1" data-name="Camisa Overzide fit" data-price="25" data-img="">
+                <span class="product-badge">$25.00</span>
+                <img src="camisa_new_york.webp" alt="Camisa Overzide fit" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Camisa Overzide fit</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="camisa" data-id="2" data-name="Camisa Manga Larga Rose Dream" data-price="25" data-img="">
+                <span class="product-badge">$25.00</span>
+                <img src="images.jpg" alt="Camisa Manga Larga Rose Dream" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Camisa Manga Larga Rose Dream</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="camisa" data-id="3" data-name="Blusa Oversize Soft Rose" data-price="25" data-img="">
+                <span class="product-badge">$25.00</span>
+                <img src="camisa-mujer-manga-larga-taupe-borados-negros-5.webp" alt="Blusa Oversize Soft Rose" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Blusa manga larga</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="camisa" data-id="4" data-name="Camisa Casual Pastel Vibe" data-price="15" data-img="">
+                <span class="product-badge">$15.00</span>
+                <img src="Factory-Wholesale-Spring-Men-s-Solid-Color-Breathable-Full-Sleeve-Simple-Loose-Cotton-Knitted-V-neck-Casual-Shirt.jpg_300x300.avif" alt="Camisa Casual Pastel Vibe" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Camisa manga larga Pastel Vibe</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="camisa" data-id="5" data-name="Camisa Pink Basic Essence" data-price="15" data-img="">
+                <span class="product-badge">$15.00</span>
+                <img src="polo.jpg" alt="Camisa Pink Basic Essence" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Camisa Polo</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="camisa" data-id="6" data-name="Camisa Urban Cotton Chic" data-price="15" data-img="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$15.00</span>
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=600&q=80" alt="Camisa Urban Cotton Chic" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Camisa Urban Cotton Chic</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <!-- PANTALONES -->
+            <div class="product-card" data-category="pantalon" data-id="7" data-name="Pantalón Wide Leg Rose Elegance" data-price="25" data-img="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$25.00</span>
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Pantalón Wide Leg Rose Elegance" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Estampado</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pantalon" data-id="8" data-name="Pantalón Jean Denim Soft Pastel" data-price="25" data-img="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$25.00</span>
+                <img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?auto=format&fit=crop&w=600&q=80" alt="Pantalón Jean Denim Soft Pastel" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Jean</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pantalon" data-id="9" data-name="Pantalón Jogger Sweet Comfort" data-price="15" data-img="https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$15.00</span>
+                <img src="https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?auto=format&fit=crop&w=600&q=80" alt="Pantalón Jogger Sweet Comfort" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Falda White</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pantalon" data-id="10" data-name="Pantalón Tailored Pink Style" data-price="25" data-img="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$25.00</span>
+                <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80" alt="Pantalón Tailored Pink Style" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Tailored Pink Style</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pantalon" data-id="11" data-name="Pantalón Flare Retro Rose" data-price="25" data-img="https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$25.00</span>
+                <img src="https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=600&q=80" alt="Pantalón Flare Retro Rose" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Flare Retro</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="pantalon" data-id="12" data-name="Pantalón Cargo Casual Street" data-price="25" data-img="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80">
+                <span class="product-badge">$25.00</span>
+                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=600&q=80" alt="Pantalón Cargo Casual Street" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Cargo Casual Street</h3>
+                    <button class="add-to-cart-btn">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CARRITO SIDEBAR -->
+    <div class="cart-overlay" id="cart-overlay"></div>
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Items del carrito -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            <button class="btn-checkout" onclick="checkout()">Procesar Compra</button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">Producto agregado al carrito</div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 STEMY CLOSET. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        let cart = [];
+
+        // DOM ELEMENTS
+        const cartOverlay = document.getElementById('cart-overlay');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const openCartBtn = document.getElementById('open-cart');
+        const closeCartBtn = document.getElementById('close-cart');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const cartCount = document.getElementById('cart-count');
+        const toast = document.getElementById('toast');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // EVENT LISTENERS PARA AGREGAR AL CARRITO DESDE EL HTML
+        productCards.forEach(card => {
+            const addBtn = card.querySelector('.add-to-cart-btn');
+            addBtn.addEventListener('click', () => {
+                const id = card.dataset.id;
+                const name = card.dataset.name;
+                const price = parseFloat(card.dataset.price);
+                const image = card.dataset.img;
+
+                addToCart({ id, name, price, image });
+            });
+        });
+
+        // LÓGICA DE FILTRADO
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+
+                productCards.forEach(card => {
+                    const category = card.dataset.category;
+                    if (filter === 'all' || category === filter) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                });
+            });
+        });
+
+        // FUNCIONES DEL CARRITO
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            showToast(`¡${product.name} agregado!`);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+            cartCount.textContent = totalCount;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p style="text-align:center; color: var(--gray); margin-top:2rem;">Tu carrito está vacío</p>';
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <span class="cart-item-price">$${item.price}.00 x ${item.quantity}</span>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+            cartTotalPrice.textContent = `$${total}.00`;
+        }
+
+        function showToast(message) {
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('El carrito está vacío');
+                return;
+            }
+            alert('¡Gracias por tu compra en STEMY CLOSET!');
+            cart = [];
+            updateCartUI();
+            toggleCart();
+        }
+
+        // TOGGLE CART SIDEBAR
+        function toggleCart() {
+            cartOverlay.classList.toggle('active');
+            cartSidebar.classList.toggle('active');
+        }
+
+        openCartBtn.addEventListener('click', toggleCart);
+        closeCartBtn.addEventListener('click', toggleCart);
+        cartOverlay.addEventListener('click', toggleCart);
+    </script>
+</body>
+</html>
